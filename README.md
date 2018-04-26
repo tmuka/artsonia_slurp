@@ -16,4 +16,4 @@ and the artist id is 0000000
 if you run it in the directory the files already exist in, it wont re-download existing files
 
 ## Todo
-~~finish the feature to pass a second argument for a grade level filter so subsequent script runs don't redownload existing files.~~
+finish the feature to pass a second argument for a grade level filter so subsequent script runs don't redownload existing files.  perhaps switch to using wget --noclobber
