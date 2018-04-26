@@ -12,5 +12,8 @@ the slideshow url is
 https://www.artsonia.com/slideshow.asp?artist=0000000
 and the artist id is 0000000
 
+## Features
+if you run it in the directory the files already exist in, it wont re-download existing files
+
 ## Todo
-finish the feature to pass a second argument for a grade level filter so subsequent script runs don't redownload existing files.
+~~finish the feature to pass a second argument for a grade level filter so subsequent script runs don't redownload existing files.~~
