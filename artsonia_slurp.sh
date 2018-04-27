@@ -19,6 +19,7 @@ if [ -n "$1" ]
 		echo "$ARTIST_ID" >> .artsonia_slurp.log
 	else 
 		echo 'Error: pass the students artist portfolio id number as the argument. get this from the portfolio.asp?id='
+		[[ -e ".artsonia_slurp.log" ]] && echo "Previously used to get ID[s] $(sort .artsonia_slurp.log | uniq | xargs )"
 		exit
 fi
 if [ -n "$2" ]
