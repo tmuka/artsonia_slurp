@@ -16,6 +16,7 @@
 
 if [ -n "$1" ]
 	then ARTIST_ID=$1
+		echo "$ARTIST_ID" >> .artsonia_slurp.log
 	else 
 		echo 'Error: pass the students artist portfolio id number as the argument. get this from the portfolio.asp?id='
 		exit
@@ -31,6 +32,7 @@ fi
 
 read -rsp $"Press any key to download pictures for artist \"$ARTIST_ID\" $GRADE_MSG, ctrl+c to abort..." -n1 key
 
-#curl -s https://www.artsonia.com/slideshow.asp?artist=$ARTIST_ID | egrep 'src.*screenname'  | sed 's;Grade ;Grade_;g' | sed "s;{src: '\(.*\)',screenname: '\(.*\)',artid: \(.*\),grade: '\(.*\)'}.*;curl -s \1 -o \"\2.\4.\3.artsonia.jpg\";g" | xargs -t -0 -i sh -c "{}"
+#curl -s https://www.artsonia.com/slideshow.asp?artist=$ARTIST_ID | egrep 'src.*screenname' | sed 's;Grade ;Grade_;g' | sed "s;{src: '\(.*\)',screenname: '\(.*\)',artid: \(.*\),grade: '\(.*\)'}.*;curl --remote-time -sS \1 -o \"\2.\4.\3.artsonia.jpg\";g" | xargs -t -0 -i sh -c "{}"
 
-curl -s https://www.artsonia.com/slideshow.asp?artist=$ARTIST_ID | egrep 'src.*screenname' | sed 's;Grade ;Grade_;g' | sed "s;{src: '\(.*\)',screenname: '\(.*\)',artid: \(.*\),grade: '\(.*\)'}.*;curl --remote-time -sS \1 -o \"\2.\4.\3.artsonia.jpg\";g" | xargs -t -0 -i sh -c "{}"
+curl -s https://www.artsonia.com/slideshow.asp?artist=$ARTIST_ID | egrep 'src.*screenname' | sed 's;Grade ;Grade_;g' | sed "s;{src: '\(.*\)',screenname: '\(.*\)',artid: \(.*\),grade: '\(.*\)'}.*; \[\[ -e \"\2.\4.\3.artsonia.jpg\" \]\] || curl --remote-time -sS \1 -o \"\2.\4.\3.artsonia.jpg\";g" | xargs -t -0 -i bash -c "{}"
+
